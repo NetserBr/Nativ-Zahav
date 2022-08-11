@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<body background="{{ url_for('static', filename='img/bg.jpg') }}">
+    <h1>Manager Page - Create new users</h1>
+
+    <form method="POST" action="">
+        <div class="container">
+        {{ form.hidden_tag() }}
+        <label for="uname"><b>Username</b></label>
+        {{ form.username }}
+        <label for="psw"><b>Password</b></label>
+        {{ form.password }}
+        <button name="submit" value"Submit" type="submit">Register</button>
+        </div>
+    </form>
+
+</body>
+
+</html>

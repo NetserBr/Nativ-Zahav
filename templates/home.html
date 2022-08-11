@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body background="{{ url_for('static', filename='img/bg.jpg') }}">
+    <h1 style="font-size: 5vmin">Welecome to Zvuvon System</h1>
+    <a class="button" href="{{ url_for('login') }}">Login Page</a><br>
+    <a href="{{ url_for('register') }}">Manager Page</a><br>
+    <img id='tank1' src="../static/img/tank1.png" alt="Flying Rocket">
+    <img id='tank2' src="../static/img/tank2.png" alt="Flying Rocket">
+
+</body>
+
+</html>

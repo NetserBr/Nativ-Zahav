@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Physics Calculator</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+</head>
+<body background="{{ url_for('static', filename='img/bg.jpg') }}">
+    <h1>Results</h1>
+
+    <table id="result">
+        <tbody>
+            <tr>
+                <td><strong>Time of flight : </strong></td>
+                <td>{{data.time}} <strong>Seconds</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Landing horizontal velocity: </strong></td>
+                <td>{{data.hvelo }} <strong>m/s</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Landing vertical velocity: </strong></td>
+                <td>{{data.vvelo}}</td>
+            </tr>
+            <tr>
+                <td><strong>Landing angle: </strong></td>
+                <td>{{data.landing_angle}} <strong>degrees</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Distance traveled: </strong></td>
+                <td>{{data.distance}} <strong>Meters</strong></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="rocket">
+    <h1>Flight Visualization</h1>
+    <img src="../static/img/rocket.jpg" alt="Flying Rocket">
+    </div>
+    
+</body>
+</html>
