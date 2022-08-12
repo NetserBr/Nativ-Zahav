@@ -17,6 +17,7 @@ app = Flask(__name__, template_folder='templates')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# Left to choose secrete key
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
 login_manager = LoginManager()
@@ -30,16 +31,22 @@ def home():
     # Rendering index html page
     return render_template('home.html')
 
+# Find user from DB
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# Define users table
 
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
+
+# Create Login Form
 
 
 class LoginForm(FlaskForm):
@@ -51,6 +58,8 @@ class LoginForm(FlaskForm):
 
     submit = SubmitField('Login')
 
+# Create Register Form
+
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[
@@ -61,6 +70,7 @@ class RegisterForm(FlaskForm):
 
     submit = SubmitField('Register')
 
+    # Checks if user exist in DB
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(
             username=username.data).first()
@@ -98,25 +108,33 @@ def index():
     elif request.method == 'GET':
         return render_template('index.html')
 
+# Login page
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Create new form
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
+            # Compare passwords to check if they are equals
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('index'))
 
     return render_template('login.html', form=form)
 
+# Register Page
+
 
 @ app.route('/register', methods=['GET', 'POST'])
 def register():
+    # Create new form
     form = RegisterForm()
 
     if form.validate_on_submit():
+        # Creating hashed password for better security
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
