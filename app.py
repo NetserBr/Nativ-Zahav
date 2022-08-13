@@ -1,3 +1,4 @@
+from turtle import distance
 from flask import Flask, jsonify, request, render_template, url_for, redirect
 from flask import Response
 import os
@@ -103,7 +104,13 @@ def index():
             result = physicsCalculator(inptAngle, inptInitVel, height)
 
             # Rendering result html poge with the data
-            return render_template("result.html", data=result)
+            # Loading the correct picture according to the results
+            if(float(result['distance']) < 0):
+                return render_template("result.html", data=result, visibility1="hidden", visibility2="visible", visibility3="hidden")
+            elif(float(result['distance']) == 0.0):
+                return render_template("result.html", data=result, visibility1="hidden", visibility2="hidden", visibility3="visible")
+            else:
+                return render_template("result.html", data=result, visibility1="visible", visibility2="hidden", visibility3="hidden")
 
     elif request.method == 'GET':
         return render_template('index.html')
