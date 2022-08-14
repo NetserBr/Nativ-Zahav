@@ -8,8 +8,8 @@ def physicsCalculator(launchAngle, initialVelocity, height):
     # horizontal velocity component
     vx = initialVelocity * (cos(radians(launchAngle)))
 
-    if(vx == -0.0):
-        vx = 0.0
+    # Preventing -0.0 result
+    vx = vx + 0
 
     # acceleration due to gravity constant in  m/s**2
     g = -9.81
@@ -29,6 +29,7 @@ def physicsCalculator(launchAngle, initialVelocity, height):
     else:
         landingAngle = 270
 
+    # Choosing the right angle from the atan
     if(vx < 0):
         landingAngle += 180
 
